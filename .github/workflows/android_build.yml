@@ -3,10 +3,9 @@ name: Android Build ## name of the workflow
 on:
   push:
     branches:
-      - master
       - main
+      - master
       - develop
-      - feature/github-action
 
 jobs:
   android-build:
@@ -59,14 +58,14 @@ jobs:
         run: |
           cd android && ./gradlew assembleRelease
 
-      - name: get-npm-version
+      - name: Read NPM version
         id: package-version
         uses: martinbeentjes/npm-get-version-action@v1.3.1
 
-      - name: 🛎️ Create release
+      - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ steps.package-version.outputs.current-version}}
+          tag: ${{ github.ref == 'refs/heads/develop' && 'Dev' || 'Prod' }}-release-${{ steps.package-version.outputs.current-version }}
           artifacts: android/app/build/outputs/apk/release/app-release.apk
 
       - name: Release
@@ -74,10 +73,6 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           files: android/app/build/outputs/apk/release/app-release.apk
-
-      - name: Check folder
-        run: |
-          pwd && ls
 
       - name: Archive release artifacts
         uses: actions/upload-artifact@v3
