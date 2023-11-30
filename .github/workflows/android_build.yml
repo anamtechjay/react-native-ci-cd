@@ -65,8 +65,9 @@ jobs:
       - name: Create release
         uses: ncipollo/release-action@v1
         with:
-          tag: ${{ github.ref == 'refs/heads/develop' && 'Dev' || 'Prod' }}-${{ steps.package-version.outputs.current-version }}
+          tag: ${{ steps.package-version.outputs.current-version }}-${{ github.ref == 'refs/heads/develop' && 'dev' || 'prod' }}
           artifacts: android/app/build/outputs/apk/release/app-release.apk
+          allowUpdates: true
 
       - name: Release
         uses: softprops/action-gh-release@v1
