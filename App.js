@@ -1,11 +1,19 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Alert,
+} from "react-native";
 import { WebView } from "react-native-webview";
 
 const App = () => {
   function onMessage(data) {
     const dataParsed = JSON.parse(data.nativeEvent.data);
     console.log(dataParsed);
+    Alert.alert("Message reciveed by react native");
   }
 
   return (
