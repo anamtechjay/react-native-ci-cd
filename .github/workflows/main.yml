@@ -1,0 +1,29 @@
+on:
+  workflow_call:
+    inputs:
+      DEPLOY_ENV:
+        required: false
+        type: string
+
+jobs:
+  post-deploy-checks:
+    name: Post Deploy Checks for TypeScript on ${{ inputs.DEPLOY_ENV }} Environment
+    runs-on: ubuntu-latest
+    environment: prod
+    env:
+      POLY_API_KEY_LOCAL: ${{ secrets.POLY_TEST_API_KEY }}
+
+    steps:
+      - name: Run API Tests
+        env:
+          POLY_TEST_API_KEY: ${{ secrets.POLY_TEST_API_KEY }}
+          DEPLOY_ENV: ${{ inputs.DEPLOY_ENV }}
+        run: |
+          echo "Running tests for environment: $DEPLOY_ENV"
+          echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY"
+          # Your test commands here
+
+      - name: Debug Environment Info
+        run: |
+          echo "Current environment: ${{ inputs.DEPLOY_ENV }}"
+          echo "Secret exists: ${{ secrets.POLY_TEST_API_KEY != '' }}"
