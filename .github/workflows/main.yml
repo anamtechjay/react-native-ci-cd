@@ -24,7 +24,15 @@ jobs:
         run: |
           echo "Running tests for environment: $DEPLOY_ENV"
           echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY"
-          echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY_2"
+          echo "POLY_TEST_API_KEY_2: $POLY_TEST_API_KEY_2"
+          echo "POLY_API_KEY_LOCAL : $POLY_API_KEY_LOCAL"
+          # Your test commands here
+      - name: Run API Tests without env
+        run: |
+          echo "Running tests for environment: $DEPLOY_ENV"
+          echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY"
+          echo "POLY_TEST_API_KEY_2: $POLY_TEST_API_KEY_2"
+          echo "POLY_API_KEY_LOCAL : $POLY_API_KEY_LOCAL"
           # Your test commands here
 
       - name: Debug Environment Info
