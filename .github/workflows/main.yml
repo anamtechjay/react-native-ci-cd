@@ -24,9 +24,11 @@ jobs:
         run: |
           echo "Running tests for environment: $DEPLOY_ENV"
           echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY"
+          echo "POLY_TEST_API_KEY: $POLY_TEST_API_KEY_2"
           # Your test commands here
 
       - name: Debug Environment Info
         run: |
           echo "Current environment: ${{ inputs.DEPLOY_ENV }}"
           echo "Secret exists: ${{ secrets.POLY_TEST_API_KEY != '' }}"
+          echo "Secret shouldn't exists: ${{ secrets.POLY_TEST_API_KEY_2 != '' }}"
