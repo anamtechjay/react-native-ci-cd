@@ -3,8 +3,8 @@ name: Android Build ## name of the workflow
 on:
   push:
     branches:
-      - main
-      - master
+      # - main
+      # - master
       - develop
 
 jobs:
